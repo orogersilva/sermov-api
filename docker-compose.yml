@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    container_name: sermov-api-container
+    depends_on:
+      - postgres
+    volumes:
+      - .:/code
+    ports:
+      - 80:80
+  postgres:
+    container_name: sermov-postgres-container
+    image: postgres
+    environment:
+      - POSTGRES_DB=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+  postgres_data:
