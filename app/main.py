@@ -13,6 +13,9 @@ app = FastAPI(
 )
 Base.metadata.create_all(bind=engine)
 
+import debugpy
+debugpy.listen(("0.0.0.0", 5678))
+
 app.include_router(
     auth.router,
     prefix="/v1/auth",
